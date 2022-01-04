@@ -5,7 +5,7 @@
 //  Created by jimmy on 2022/1/4.
 //
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SAStatelessWidget extends StatelessWidget {
@@ -21,27 +21,25 @@ class SAStatelessWidget extends StatelessWidget {
   }
 }
 
-class SAStatefulState<T extends StatefulWidget> extends State<T> {
-  final Widget _child;
-  final Size _designSize;
-  final Orientation _orientation;
-  SAStatefulState(
-      {required Widget child,
-      required Size designSize,
-      required Orientation orientation})
-      : _child = child,
-        _designSize = designSize,
-        _orientation = orientation;
+abstract class SAStatefulState<T extends StatefulWidget> extends State<T> {
+  SAStatefulState();
+  @protected
+  Size designSize();
+  @protected
+  Orientation orientation();
+  @protected
+  Widget child();
 
   @override
+  @mustCallSuper
   Widget build(BuildContext context) {
     ScreenUtil.init(
         BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width,
             maxHeight: MediaQuery.of(context).size.height),
-        designSize: _designSize,
+        designSize: designSize(),
         minTextAdapt: false,
-        orientation: _orientation);
-    return _child;
+        orientation: orientation());
+    return child();
   }
 }
