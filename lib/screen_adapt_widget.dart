@@ -27,18 +27,21 @@ abstract class SAStatefulState<T extends StatefulWidget> extends State<T> {
   @protected
   Orientation orientation();
   @protected
-  Widget child();
+  Widget child({required BuildContext context});
+  @protected
+  double deviceMaxWidth();
+  @protected
+  double deviceMaxHeight();
 
   @override
   @mustCallSuper
   Widget build(BuildContext context) {
     ScreenUtil.init(
         BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height),
+            maxWidth: deviceMaxWidth(), maxHeight: deviceMaxHeight()),
         designSize: designSize(),
         minTextAdapt: false,
         orientation: orientation());
-    return child();
+    return child(context: context);
   }
 }
