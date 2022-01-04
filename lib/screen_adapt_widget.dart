@@ -22,10 +22,8 @@ class SAStatelessWidget extends StatelessWidget {
 }
 
 abstract class SAStatefulState<T extends StatefulWidget> extends State<T> {
-  SAStatefulState();
   @protected
   Size designSize();
-  @protected
   Orientation orientation();
   @protected
   Widget child();
