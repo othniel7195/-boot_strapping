@@ -11,14 +11,25 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SAStatelessWidget extends StatelessWidget {
   final Widget child;
   final Size designSize;
+  final Size deviceSize;
+  final Orientation orientation;
   const SAStatelessWidget(
-      {Key? key, required this.child, required this.designSize})
+      {Key? key,
+      required this.child,
+      required this.designSize,
+      required this.deviceSize,
+      required this.orientation})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-        minTextAdapt: false, designSize: designSize, builder: () => child);
+    ScreenUtil.init(
+        BoxConstraints(
+            maxWidth: deviceSize.width, maxHeight: deviceSize.height),
+        designSize: designSize,
+        minTextAdapt: false,
+        orientation: orientation);
+    return child;
   }
 }
 
