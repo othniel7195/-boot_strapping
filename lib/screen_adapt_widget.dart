@@ -17,7 +17,8 @@ class SAStatelessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(minTextAdapt: false, builder: () => child);
+    //return ScreenUtilInit(minTextAdapt: false, builder: () => child);
+    return child;
   }
 }
 
@@ -36,12 +37,12 @@ abstract class SAStatefulState<T extends StatefulWidget> extends State<T> {
   @override
   @mustCallSuper
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: deviceMaxWidth(), maxHeight: deviceMaxHeight()),
-        designSize: designSize(),
-        minTextAdapt: false,
-        orientation: orientation());
+    // ScreenUtil.init(
+    //     BoxConstraints(
+    //         maxWidth: deviceMaxWidth(), maxHeight: deviceMaxHeight()),
+    //     designSize: designSize(),
+    //     minTextAdapt: false,
+    //     orientation: orientation());
     return child(context: context);
   }
 }
