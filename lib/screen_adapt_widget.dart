@@ -1,3 +1,12 @@
+/*
+ * @Author: jimmy.zhao
+ * @Date: 2022-01-04 14:02:07
+ * @LastEditTime: 2022-02-28 16:00:22
+ * @LastEditors: jimmy.zhao
+ * @Description:  
+ * 
+ * 
+ */
 //
 //  screen_adapt_widget.dart
 //  boot_strapping
@@ -7,6 +16,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'life_cycle_state.dart';
 
 class SAStatelessWidget extends StatelessWidget {
   final Widget child;
@@ -34,6 +44,32 @@ class SAStatelessWidget extends StatelessWidget {
 }
 
 abstract class SAStatefulState<T extends StatefulWidget> extends State<T> {
+  @protected
+  Size designSize();
+  @protected
+  Orientation orientation();
+  @protected
+  Widget child({required BuildContext context});
+  @protected
+  double deviceMaxWidth();
+  @protected
+  double deviceMaxHeight();
+
+  @override
+  @mustCallSuper
+  Widget build(BuildContext context) {
+    ScreenUtil.init(
+        BoxConstraints(
+            maxWidth: deviceMaxWidth(), maxHeight: deviceMaxHeight()),
+        designSize: designSize(),
+        minTextAdapt: false,
+        orientation: orientation());
+    return child(context: context);
+  }
+}
+
+abstract class SALifecycleStatefulState<T extends StatefulWidget>
+    extends LifecycleState<T> {
   @protected
   Size designSize();
   @protected
