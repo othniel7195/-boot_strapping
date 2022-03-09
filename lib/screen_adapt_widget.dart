@@ -1,7 +1,7 @@
 /*
  * @Author: jimmy.zhao
  * @Date: 2022-01-04 14:02:07
- * @LastEditTime: 2022-02-28 16:00:22
+ * @LastEditTime: 2022-03-09 11:17:49
  * @LastEditors: jimmy.zhao
  * @Description:  
  * 
@@ -38,6 +38,7 @@ class SAStatelessWidget extends StatelessWidget {
             maxWidth: deviceSize.width, maxHeight: deviceSize.height),
         designSize: designSize,
         minTextAdapt: false,
+        context: context,
         orientation: orientation);
     return child;
   }
@@ -63,6 +64,7 @@ abstract class SAStatefulState<T extends StatefulWidget> extends State<T> {
             maxWidth: deviceMaxWidth(), maxHeight: deviceMaxHeight()),
         designSize: designSize(),
         minTextAdapt: false,
+        context: context,
         orientation: orientation());
     return child(context: context);
   }
@@ -89,6 +91,7 @@ abstract class SALifecycleStatefulState<T extends StatefulWidget>
             maxWidth: deviceMaxWidth(), maxHeight: deviceMaxHeight()),
         designSize: designSize(),
         minTextAdapt: false,
+        context: context,
         orientation: orientation());
     return child(context: context);
   }
