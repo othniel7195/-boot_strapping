@@ -1,7 +1,7 @@
 /*
  * @Author: jimmy.zhao
  * @Date: 2022-01-04 14:02:07
- * @LastEditTime: 2022-03-09 11:46:27
+ * @LastEditTime: 2022-03-20 14:08:50
  * @LastEditors: jimmy.zhao
  * @Description:  
  * 
@@ -23,22 +23,28 @@ class SAStatelessWidget extends StatelessWidget {
   final Size designSize;
   final Size deviceSize;
   final Orientation orientation;
+  final bool needLayout;
   const SAStatelessWidget(
       {Key? key,
       required this.child,
       required this.designSize,
       required this.deviceSize,
-      required this.orientation})
+      required this.orientation,
+      this.needLayout = false})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: deviceSize.width, maxHeight: deviceSize.height),
-        designSize: designSize,
-        minTextAdapt: false,
-        orientation: orientation);
+    if (needLayout) {
+      ScreenUtil.init(
+          BoxConstraints(
+              maxWidth: deviceSize.width, maxHeight: deviceSize.height),
+          designSize: designSize,
+          context: context,
+          minTextAdapt: false,
+          orientation: orientation);
+    }
+
     return child;
   }
 }
@@ -54,16 +60,22 @@ abstract class SAStatefulState<T extends StatefulWidget> extends State<T> {
   double deviceMaxWidth();
   @protected
   double deviceMaxHeight();
+  @protected
+  bool needLayout();
 
   @override
   @mustCallSuper
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: deviceMaxWidth(), maxHeight: deviceMaxHeight()),
-        designSize: designSize(),
-        minTextAdapt: false,
-        orientation: orientation());
+    if (needLayout()) {
+      ScreenUtil.init(
+          BoxConstraints(
+              maxWidth: deviceMaxWidth(), maxHeight: deviceMaxHeight()),
+          designSize: designSize(),
+          minTextAdapt: false,
+          context: context,
+          orientation: orientation());
+    }
+
     return child(context: context);
   }
 }
@@ -80,16 +92,22 @@ abstract class SALifecycleStatefulState<T extends StatefulWidget>
   double deviceMaxWidth();
   @protected
   double deviceMaxHeight();
+  @protected
+  bool needLayout();
 
   @override
   @mustCallSuper
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: deviceMaxWidth(), maxHeight: deviceMaxHeight()),
-        designSize: designSize(),
-        minTextAdapt: false,
-        orientation: orientation());
+    if (needLayout()) {
+      ScreenUtil.init(
+          BoxConstraints(
+              maxWidth: deviceMaxWidth(), maxHeight: deviceMaxHeight()),
+          designSize: designSize(),
+          minTextAdapt: false,
+          context: context,
+          orientation: orientation());
+    }
+
     return child(context: context);
   }
 }
