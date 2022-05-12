@@ -176,8 +176,10 @@ class LifecycleManager with WidgetsBindingObserver, RouteAware {
 
   initRoute(BuildContext context) {
     if (ModalRoute.of(context) != null) {
-      var route = ModalRoute.of(context) as PageRoute<dynamic>;
-      routeObserver.subscribe(this, route);
+      var route = ModalRoute.of(context) as PageRoute<dynamic>?;
+      if (route != null) {
+        routeObserver.subscribe(this, route);
+      }
     }
   }
 
