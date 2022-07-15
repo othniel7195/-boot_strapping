@@ -157,7 +157,7 @@ class LifecycleManager with WidgetsBindingObserver, RouteAware {
   StreamSubscription? _subscriptionEvent;
 
   void init(BuildContext context) {
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     _initialize();
   }
 
@@ -187,7 +187,7 @@ class LifecycleManager with WidgetsBindingObserver, RouteAware {
     _subscriptionEvent?.cancel();
     routeObserver.unsubscribe(this);
     _lifecycle.onDestroy();
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
   }
 
   @override
