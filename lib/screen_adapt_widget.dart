@@ -1,7 +1,7 @@
 /*
  * @Author: jimmy.zhao
  * @Date: 2022-01-04 14:02:07
- * @LastEditTime: 2022-03-20 14:08:50
+ * @LastEditTime: 2022-07-16 00:38:02
  * @LastEditors: jimmy.zhao
  * @Description:  
  * 
@@ -37,12 +37,10 @@ class SAStatelessWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (needLayout) {
       ScreenUtil.init(
-          BoxConstraints(
-              maxWidth: deviceSize.width, maxHeight: deviceSize.height),
-          designSize: designSize,
-          context: context,
-          minTextAdapt: false,
-          orientation: orientation);
+        context,
+        designSize: designSize,
+        minTextAdapt: false,
+      );
     }
 
     return child;
@@ -68,12 +66,10 @@ abstract class SAStatefulState<T extends StatefulWidget> extends State<T> {
   Widget build(BuildContext context) {
     if (needLayout()) {
       ScreenUtil.init(
-          BoxConstraints(
-              maxWidth: deviceMaxWidth(), maxHeight: deviceMaxHeight()),
-          designSize: designSize(),
-          minTextAdapt: false,
-          context: context,
-          orientation: orientation());
+        context,
+        designSize: designSize(),
+        minTextAdapt: false,
+      );
     }
 
     return child(context: context);
@@ -100,12 +96,10 @@ abstract class SALifecycleStatefulState<T extends StatefulWidget>
   Widget build(BuildContext context) {
     if (needLayout()) {
       ScreenUtil.init(
-          BoxConstraints(
-              maxWidth: deviceMaxWidth(), maxHeight: deviceMaxHeight()),
-          designSize: designSize(),
-          minTextAdapt: false,
-          context: context,
-          orientation: orientation());
+        context,
+        designSize: designSize(),
+        minTextAdapt: false,
+      );
     }
 
     return child(context: context);
